@@ -25,9 +25,9 @@ public class App {
         Gato gatoSp = new Gato("Leo SP", 10,"Calle");
 
         List<Animal> animalesSp = new ArrayList<>();
-        animales.add(perroSp);
-        animales.add(perro2Sp);
-        animales.add(gatoSp);
+        animalesSp.add(perroSp);
+        animalesSp.add(perro2Sp);
+        animalesSp.add(gatoSp);
 
         ZoologicoSaenzPena zoologicoSaenzPena = new ZoologicoSaenzPena(animalesSp);
 
