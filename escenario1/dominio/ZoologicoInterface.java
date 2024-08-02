@@ -4,4 +4,9 @@ public interface ZoologicoInterface {
     //Metodos
     //Responsabilidades
     void hacerSonidoAnimal(); //Firma
+
+
+
+
+
 }
