@@ -2,12 +2,10 @@ package escenario2.dominio;
 
 import escenario2.enumeration.ComplejidadEnum;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.*;
 
 public class Curso {
+    private UUID id;
     private String nombre;
     private Integer cantidadHoras;
     private ComplejidadEnum complejidad;
@@ -53,5 +51,31 @@ public class Curso {
 
     public void setExamenes(List<Examen> examenes) {
         this.examenes = examenes;
+    }
+
+    public UUID getId() {
+        return id;
+    }
+
+    public void setId(UUID id) {
+        this.id = id;
+    }
+
+    @Override
+    public String toString() {
+
+        //Patron builder
+        StringBuilder stringBuilder = new StringBuilder();
+        return stringBuilder.append("Id : ")
+                .append(this.getId()).append("\n")
+                .append("Nombre : ")
+                .append(this.getNombre()).append("\n")
+                .append("Cantidad de horas : ")
+                .append(this.getCantidadHoras()).append("\n")
+                .append("Complejidad : ")
+                .append(this.getComplejidad()).append("\n")
+                .append("-------------------------------------------------------\n")
+                .toString();
+
     }
 }
