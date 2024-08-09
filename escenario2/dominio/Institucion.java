@@ -3,10 +3,7 @@ package escenario2.dominio;
 import escenario2.enumeration.ComplejidadEnum;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
-import java.util.UUID;
+import java.util.*;
 
 public class Institucion {
     private List<Curso> cursos = new ArrayList();
@@ -118,6 +115,65 @@ public class Institucion {
         System.out.println("Curso creado satisfactoriamente");
 
         return nuevoCurso;
+    }
+
+    public void inscribirEstudianteACurso(UUID idCurso, Long dni){
+
+        Estudiante estudiante = null;
+        boolean existeElEstudiante = Boolean.FALSE;
+        boolean esCursoEncontrado = Boolean.FALSE;
+
+        for (Curso curso: this.cursos){
+            if (curso.getEstudiantes().containsKey(dni)){
+                estudiante = curso.getEstudiantes().get(dni);
+                existeElEstudiante = Boolean.TRUE;
+                break;
+            }
+        }
+        if (!existeElEstudiante){
+            throw new NoSuchElementException("No existe el estudiante");
+        }
+
+        for (Curso curso: this.cursos){
+            if (curso.getId().equals(idCurso)){
+                estudiante.getCursos().add(curso);
+                curso.getEstudiantes().put(estudiante.getDni(), estudiante);
+                esCursoEncontrado = Boolean.TRUE;
+                break;
+            }
+        }
+
+        if (!esCursoEncontrado){
+            throw new NoSuchElementException("No existe el curso");
+        }else {
+            System.out.println("Estudiante asignado al curso");
+        }
+
+    }
+
+    /*
+        Proporcionar un método para mostrar la información de los estudiantes (nombre, dni y edad) y
+        los cursos en los que están inscritos.
+     */
+    public void listarEstudiantesYCursos(){
+        Set<Estudiante> listasEstudiantesSinRepetir = new HashSet<>(); //hashSet para evitar elementos duplicados
+
+        // Recorrer los cursos y agregar estudiantes al HashSet
+        for (Curso curso : cursos) {
+            listasEstudiantesSinRepetir.addAll(curso.getEstudiantes().values());
+        }
+
+        ArrayList<Estudiante> listaEstudiantes = new ArrayList<>(listasEstudiantesSinRepetir);
+
+        System.out.println("Estudiantes: ");
+        for (Estudiante estudiante : listaEstudiantes) {
+            System.out.println( estudiante.toString() );
+
+            for (Curso curso: estudiante.getCursos()) {
+                System.out.println(curso.toString());
+            }
+
+        }
     }
 
     public List<Curso> getCursos() {
