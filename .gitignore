@@ -4,3 +4,5 @@
 #Archivos de compilacion
 out
 *.class
+escenario2-mvn/instituto-project/target/
+escenario2/escenario2.iml
